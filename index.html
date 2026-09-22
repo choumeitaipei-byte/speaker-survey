@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>洲美社 主講人問卷調查</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF8EE; --ink:#2B2D42; --muted:#6B6E85;
+  --c1:#FF6B4A; --c2:#FFC93C; --c3:#2EC4B6; --c4:#4D9DE0; --c5:#9B5DE5;
+  --purple:#5B3FA8; --purple-d:#432E82;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.7;font-size:16px}
+#bar{position:fixed;top:0;left:0;height:6px;width:0;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3),var(--c4),var(--c5));transition:width .3s;z-index:10}
+header{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--purple),var(--purple-d));padding:88px 20px 96px;text-align:center;color:#fff}
+header .deco{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+header .wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:auto;display:block}
+.logobox{position:absolute;top:16px;left:16px;background:#fff;border-radius:16px;padding:8px 12px;box-shadow:0 6px 0 rgba(0,0,0,.12);z-index:2}
+.logobox img{display:block;height:38px;width:auto}
+header .inner{position:relative;z-index:2;background:rgba(30,17,74,.42);border-radius:28px;padding:20px 22px;margin:0 auto;max-width:600px;box-shadow:0 4px 24px rgba(0,0,0,.15)}
+header h1{margin:56px 0 14px;font-size:clamp(28px,7vw,44px);font-weight:900;letter-spacing:.04em;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.55)}
+header p{max-width:560px;margin:0 auto 8px;font-weight:500;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+header .lead{font-size:1.15em;font-weight:800;color:var(--c2);text-shadow:0 1px 4px rgba(0,0,0,.4)}
+main{max-width:680px;margin:0 auto;padding:0 16px 60px}
+.card{--c:var(--c1);background:#fff;border-radius:24px;padding:24px 22px 26px;margin-top:20px;border-left:10px solid var(--c);box-shadow:0 6px 0 rgba(43,45,66,.06)}
+.card:nth-of-type(5n+2){--c:var(--c2)} .card:nth-of-type(5n+3){--c:var(--c3)}
+.card:nth-of-type(5n+4){--c:var(--c4)} .card:nth-of-type(5n+5){--c:var(--c5)}
+.qh{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+.no{flex:none;width:38px;height:38px;border-radius:50%;background:var(--c);color:#fff;font-weight:900;display:grid;place-items:center;font-size:15px}
+.qh h2{margin:0;font-size:18px;line-height:1.5;padding-top:4px}
+.req{color:var(--c1);font-weight:700}
+.hint{color:var(--muted);font-size:14px;margin:4px 0 12px}
+input[type=text],textarea{width:100%;font:inherit;padding:12px 14px;border:2px solid #E6E2D9;border-radius:14px;background:#FFFDF9;color:var(--ink)}
+input[type=text]:focus,textarea:focus{outline:none;border-color:var(--c)}
+textarea{min-height:110px;resize:vertical}
+.opts{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.opts.col{flex-direction:column}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;cursor:pointer;width:100%;height:100%;margin:0}
+.opt span{display:block;padding:9px 16px;border:2px solid #E6E2D9;border-radius:999px;background:#FFFDF9;font-weight:500;transition:.15s}
+.opts.col .opt span{border-radius:16px;padding:12px 16px}
+.opt input:hover+span{border-color:var(--c)}
+.opt input:checked+span{background:var(--c);border-color:var(--c);color:#fff;font-weight:700}
+.card:nth-of-type(5n+2) .opt input:checked+span{color:var(--ink)}
+.opt input:focus-visible+span{outline:3px solid var(--ink);outline-offset:2px}
+.scale{display:flex;gap:10px;justify-content:space-between;margin:14px 0 6px}
+.scale .opt{flex:1}
+.scale .opt span{border-radius:50%;aspect-ratio:1;display:grid;place-items:center;font-size:22px;font-weight:900;padding:0;max-width:64px;margin:0 auto}
+.scale .opt input:checked+span{transform:scale(1.18)}
+.ends{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.themes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 16px}
+.themes div{border-radius:16px;padding:12px 14px;font-size:14px;line-height:1.5;color:#fff}
+.themes b{display:block;font-size:16px}
+.themes div:nth-child(1){background:var(--c4)} .themes div:nth-child(2){background:var(--c3)}
+.themes div:nth-child(3){background:var(--c2);color:var(--ink)} .themes div:nth-child(4){background:var(--c5)}
+.sub{margin-top:14px}
+.sub label{display:block;font-weight:700;font-size:14px;margin:12px 0 6px}
+.reveal{display:none;margin-top:6px;padding:14px;border-radius:16px;background:#F7F3FF}
+.reveal.on{display:block}
+.other{display:none;margin:0 0 6px}
+.other.on{display:block}
+.err{display:none;color:#D62839;font-weight:700;font-size:14px;margin-top:8px}
+.card.bad{box-shadow:0 0 0 3px #D62839}
+.card.bad .err{display:block}
+.send{display:block;width:100%;margin-top:28px;padding:16px;font:inherit;font-size:18px;font-weight:900;border:0;border-radius:999px;background:var(--c1);color:#fff;cursor:pointer;box-shadow:0 6px 0 #C94A2E;transition:transform .1s}
+.send:active{transform:translateY(4px);box-shadow:0 2px 0 #C94A2E}
+.send:disabled{opacity:.6;cursor:wait}
+#fail{display:none;text-align:center;color:#D62839;font-weight:700;margin-top:14px}
+#thanks{display:none;max-width:680px;margin:-28px auto 0;padding:0 16px 80px}
+#thanks .card{border-left-color:var(--c3);text-align:center;padding:40px 24px}
+#thanks h2{font-size:26px;margin:0 0 12px}
+.dot{position:fixed;top:-20px;width:10px;height:14px;z-index:20;animation:fall linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg)}}
+@media (prefers-reduced-motion:reduce){.dot{display:none}*{transition:none!important}}
+@media (max-width:420px){
+  .themes{grid-template-columns:1fr}
+  header{padding:76px 16px 76px}
+  .logobox img{height:30px}
+  header .deco{opacity:.7}
+  header .deco g[transform*="255,120"], header .deco g[transform*="300,168"]{display:none}
+}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<header id="top">
+  <div class="logobox"><img src="logo.png" alt="Rotary Club of Taipei Choumei"></div>
+
+  <svg class="deco" viewBox="0 0 400 260" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- stars -->
+    <path d="M40 30 l4 10 10 1 -8 7 3 10 -9 -6 -9 6 3 -10 -8 -7 10 -1z" fill="#FFC93C"/>
+    <path d="M360 45 l3 8 8 1 -6 5 2 8 -7 -5 -7 5 2 -8 -6 -5 8 -1z" fill="#FF6B4A"/>
+    <path d="M20 170 l3 7 7 1 -5 4 2 7 -7 -4 -7 4 2 -7 -5 -4 7 -1z" fill="#2EC4B6"/>
+    <!-- dots -->
+    <circle cx="330" cy="150" r="6" fill="#2EC4B6"/>
+    <circle cx="70" cy="200" r="5" fill="#4D9DE0"/>
+    <circle cx="380" cy="200" r="4" fill="#FFC93C"/>
+    <circle cx="150" cy="20" r="4" fill="#FF6B4A"/>
+    <!-- triangles -->
+    <path d="M300 20 l14 22 h-28z" fill="#4D9DE0" opacity=".9"/>
+    <path d="M60 60 l10 16 h-20z" fill="#FF6B4A" opacity=".9"/>
+    <!-- squiggle -->
+    <path d="M240 200 q10 -14 20 0 t20 0" stroke="#FFC93C" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M40 110 q10 -14 20 0 t20 0" stroke="#4D9DE0" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </svg>
+
+  <svg class="deco" viewBox="0 0 400 260" preserveAspectRatio="xMinYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- microphone, bottom-left -->
+    <g transform="translate(18,150) rotate(-8)">
+      <rect x="10" y="0" width="26" height="46" rx="13" fill="#FFC93C"/>
+      <rect x="14" y="6" width="18" height="4" rx="2" fill="#5B3FA8" opacity=".5"/>
+      <rect x="14" y="14" width="18" height="4" rx="2" fill="#5B3FA8" opacity=".5"/>
+      <path d="M2 40 a21 21 0 0 0 42 0" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <line x1="23" y1="61" x2="23" y2="78" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+      <line x1="10" y1="78" x2="36" y2="78" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+    </g>
+  </svg>
+
+  <svg class="deco" viewBox="0 0 400 260" preserveAspectRatio="xMaxYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- speech bubbles, bottom-right -->
+    <g transform="translate(255,120)">
+      <rect x="0" y="0" width="94" height="40" rx="18" fill="#FF6B4A"/>
+      <path d="M18 40 l0 14 16 -14z" fill="#FF6B4A"/>
+      <text x="47" y="26" text-anchor="middle" font-family="Noto Sans TC, sans-serif" font-weight="700" font-size="14" fill="#fff">AI 月？</text>
+    </g>
+    <g transform="translate(300,168)">
+      <rect x="0" y="0" width="94" height="40" rx="18" fill="#2EC4B6"/>
+      <path d="M76 40 l0 14 -16 -14z" fill="#2EC4B6"/>
+      <text x="47" y="26" text-anchor="middle" font-family="Noto Sans TC, sans-serif" font-weight="700" font-size="14" fill="#fff">想聽誰？</text>
+    </g>
+  </svg>
+
+  <div class="inner">
+    <h1>洲美社 主講人問卷調查</h1>
+    <p class="lead">今年的例會，你喜歡嗎？明年又想聽什麼？</p>
+    <p>洲美社想聽聽大家的想法！從今年的主講人安排，到未來想聽的主題、講師，甚至是「AI 月」、「運動月」這種主題式安排，都歡迎告訴我們。</p>
+    <p>花幾分鐘填寫，讓我們一起把未來的例會變得更有意思！</p>
+  </div>
+
+  <svg class="wave" viewBox="0 0 400 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M0 20 Q 25 0 50 20 T 100 20 T 150 20 T 200 20 T 250 20 T 300 20 T 350 20 T 400 20 V40 H0 Z" fill="#FFF8EE"/>
+  </svg>
+</header>
+
+<main id="formWrap">
+<form id="f" novalidate>
+
+  <section class="card" data-q="1" data-req="1">
+    <div class="qh"><div class="no">01</div><h2>請留下你的 Nickname <span class="req">*</span></h2></div>
+    <input type="text" name="nickname" maxlength="40" placeholder="Nickname" autocomplete="off">
+    <div class="err">請填寫 Nickname</div>
+  </section>
+
+  <section class="card" data-q="2" data-req="1">
+    <div class="qh"><div class="no">02</div><h2>對於今年主講人的安排，你滿意嗎？ <span class="req">*</span></h2></div>
+    <p class="hint">請給今年的主講人安排一個分數</p>
+    <div class="scale">
+      <label class="opt"><input type="radio" name="score" value="1"><span>1</span></label>
+      <label class="opt"><input type="radio" name="score" value="2"><span>2</span></label>
+      <label class="opt"><input type="radio" name="score" value="3"><span>3</span></label>
+      <label class="opt"><input type="radio" name="score" value="4"><span>4</span></label>
+      <label class="opt"><input type="radio" name="score" value="5"><span>5</span></label>
+    </div>
+    <div class="ends"><span>1　需要加強</span><span>5　非常好</span></div>
+    <div class="err">請選一個分數</div>
+  </section>
+
+  <section class="card" data-q="3">
+    <div class="qh"><div class="no">03</div><h2>未來想聽哪些類型的主題？</h2></div>
+    <p class="hint">可複選，想選幾個都可以！</p>
+    <div class="opts">
+      <label class="opt"><input type="checkbox" name="topics" value="AI／科技／數位"><span>AI／科技／數位</span></label>
+      <label class="opt"><input type="checkbox" name="topics" value="運動／健康／養生"><span>運動／健康／養生</span></label>
+      <label class="opt"><input type="checkbox" name="topics" value="財經／投資／理財"><span>財經／投資／理財</span></label>
+      <label class="opt"><input type="checkbox" name="topics" value="職場／管理／領導"><span>職場／管理／領導</span></label>
+      <label class="opt"><input type="checkbox" name="topics" value="行銷／品牌／媒體"><span>行銷／品牌／媒體</span></label>
+      <label class="opt"><input type="checkbox" name="topics" value="文學／歷史／人文"><span>文學／歷史／人文</span></label>
+      <label class="opt"><input type="checkbox" name="topics" value="心理／溝通／人際"><span>心理／溝通／人際</span></label>
+      <label class="opt"><input type="checkbox" name="topics" value="美妝／時尚／流行"><span>美妝／時尚／流行</span></label>
+      <label class="opt"><input type="checkbox" name="topics" value="藝術／電影／音樂"><span>藝術／電影／音樂</span></label>
+      <label class="opt"><input type="checkbox" name="topics" value="旅遊／美食／文化"><span>旅遊／美食／文化</span></label>
+      <label class="opt"><input type="checkbox" name="topics" value="其他" data-other="topicsOther"><span>其他</span></label>
+    </div>
+    <input type="text" class="other" id="topicsOther" name="topicsOther" maxlength="80" placeholder="請填寫其他主題">
+  </section>
+
+  <section class="card" data-q="4" data-req="1">
+    <div class="qh"><div class="no">04</div><h2>你會想要「主題式月份」的安排嗎？ <span class="req">*</span></h2></div>
+    <p class="hint">例如：</p>
+    <div class="themes">
+      <div><b>🤖 AI 月</b>連續幾週，從不同角度認識 AI</div>
+      <div><b>🏃 運動月</b>運動、健康、養生，一個月一次聽個夠</div>
+      <div><b>💰 財經月</b>投資、理財、企業經營等不同面向</div>
+      <div><b>🎬 文化月</b>電影、音樂、藝術、歷史……</div>
+    </div>
+    <div class="opts col">
+      <label class="opt"><input type="radio" name="monthly" value="很期待，可以試試看！"><span>很期待，可以試試看！</span></label>
+      <label class="opt"><input type="radio" name="monthly" value="可以，但偶爾安排就好"><span>可以，但偶爾安排就好</span></label>
+      <label class="opt"><input type="radio" name="monthly" value="沒有特別意見"><span>沒有特別意見</span></label>
+      <label class="opt"><input type="radio" name="monthly" value="比較喜歡每週不同主題"><span>比較喜歡每週不同主題</span></label>
+    </div>
+    <div class="sub">
+      <label for="monthTheme">如果有主題式月份，你最想要哪一個？</label>
+      <input type="text" id="monthTheme" name="monthTheme" maxlength="60">
+    </div>
+    <div class="err">請選一個選項</div>
+  </section>
+
+  <section class="card" data-q="5" data-req="1">
+    <div class="qh"><div class="no">05</div><h2>你心中有沒有一位「很想看到他來洲美分享」的人？ <span class="req">*</span></h2></div>
+    <p class="hint">不一定要是專業講師！企業家、創作者、YouTuber、Podcaster、運動員，甚至是你身邊很有故事、很有想法的人，都可以推薦。</p>
+    <div class="opts col">
+      <label class="opt"><input type="radio" name="rec" value="有，我已經想到人選了！"><span>有，我已經想到人選了！</span></label>
+      <label class="opt"><input type="radio" name="rec" value="有興趣，但目前還沒有想到人選"><span>有興趣，但目前還沒有想到人選</span></label>
+      <label class="opt"><input type="radio" name="rec" value="目前沒有"><span>目前沒有</span></label>
+    </div>
+    <div class="reveal" id="recBox">
+      <label for="spName" style="font-weight:700;font-size:14px">講師姓名／職稱</label>
+      <input type="text" id="spName" name="spName" maxlength="80">
+      <label for="spChannel" style="display:block;font-weight:700;font-size:14px;margin-top:12px">或 YouTube／Podcast／社群頻道名稱</label>
+      <input type="text" id="spChannel" name="spChannel" maxlength="80">
+      <label for="spWhy" style="display:block;font-weight:700;font-size:14px;margin-top:12px">為什麼想推薦他／她？（選填）</label>
+      <textarea id="spWhy" name="spWhy" maxlength="500"></textarea>
+    </div>
+    <div class="err">請選一個選項</div>
+  </section>
+
+  <section class="card" data-q="6">
+    <div class="qh"><div class="no">06</div><h2>你比較喜歡哪一種主講方式？</h2></div>
+    <p class="hint">可複選</p>
+    <div class="opts">
+      <label class="opt"><input type="checkbox" name="styles" value="專業知識／專題分享"><span>專業知識／專題分享</span></label>
+      <label class="opt"><input type="checkbox" name="styles" value="人生故事／經驗分享"><span>人生故事／經驗分享</span></label>
+      <label class="opt"><input type="checkbox" name="styles" value="實際案例／實戰分享"><span>實際案例／實戰分享</span></label>
+      <label class="opt"><input type="checkbox" name="styles" value="現場互動／體驗"><span>現場互動／體驗</span></label>
+      <label class="opt"><input type="checkbox" name="styles" value="訪談／對談"><span>訪談／對談</span></label>
+      <label class="opt"><input type="checkbox" name="styles" value="輕鬆聊天／生活分享"><span>輕鬆聊天／生活分享</span></label>
+      <label class="opt"><input type="checkbox" name="styles" value="Workshop／實作"><span>Workshop／實作</span></label>
+      <label class="opt"><input type="checkbox" name="styles" value="TED／影片／多媒體形式"><span>TED／影片／多媒體形式</span></label>
+      <label class="opt"><input type="checkbox" name="styles" value="其他" data-other="stylesOther"><span>其他</span></label>
+    </div>
+    <input type="text" class="other" id="stylesOther" name="stylesOther" maxlength="80" placeholder="請填寫其他方式">
+  </section>
+
+  <section class="card" data-q="7">
+    <div class="qh"><div class="no">07</div><h2>最後，還有什麼想告訴我們？</h2></div>
+    <p class="hint">不管是想聽的主題、推薦的講師，或是對今年例會安排的想法，都歡迎告訴我們！你的想法，可能就是下一場例會的開始。</p>
+    <textarea name="comment" maxlength="1000"></textarea>
+  </section>
+
+  <button class="send" id="send" type="submit">送出問卷</button>
+  <div id="fail">送出失敗，請檢查網路後再按一次「送出問卷」。</div>
+</form>
+</main>
+
+<div id="thanks">
+  <div class="card">
+    <h2>謝謝你的分享！🎉</h2>
+    <p>洲美社會把大家的意見整理起來，作為未來主講人與例會主題規劃的參考。</p>
+    <p><b>下一場你想聽什麼？也許，就從你的答案開始。</b></p>
+  </div>
+</div>
+
+<script>
+// ▼▼ 第 5 步完成後，把 Apps Script 部署出來的「網頁應用程式網址」貼在這裡 ▼▼
+const ENDPOINT = "貼上你的 Apps Script 網址";
+// ▲▲ ------------------------------------------------------------------ ▲▲
+
+const f = document.getElementById('f');
+const $ = s => f.querySelector(s);
+const val = n => (f.elements[n] ? f.elements[n].value.trim() : '');
+const radio = n => { const r = f.querySelector('input[name="'+n+'"]:checked'); return r ? r.value : ''; };
+const multi = n => [...f.querySelectorAll('input[name="'+n+'"]:checked')].map(x => x.value);
+
+// 進度條：計算 7 題中已填寫的題數
+function answered(q){
+  switch(q){
+    case 1: return !!val('nickname');
+    case 2: return !!radio('score');
+    case 3: return multi('topics').length > 0;
+    case 4: return !!radio('monthly');
+    case 5: return !!radio('rec');
+    case 6: return multi('styles').length > 0;
+    case 7: return !!val('comment');
+  }
+}
+function progress(){
+  let n = 0; for(let q=1;q<=7;q++) if(answered(q)) n++;
+  document.getElementById('bar').style.width = (n/7*100)+'%';
+}
+
+// 「其他」勾選後才顯示輸入框
+f.querySelectorAll('input[data-other]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    const box = document.getElementById(cb.dataset.other);
+    box.classList.toggle('on', cb.checked);
+    if(cb.checked) box.focus();
+  });
+});
+
+// Q05 選第一項才展開推薦欄位
+f.querySelectorAll('input[name="rec"]').forEach(r => {
+  r.addEventListener('change', () => {
+    document.getElementById('recBox').classList.toggle('on', radio('rec').startsWith('有，'));
+  });
+});
+
+f.addEventListener('input', progress);
+f.addEventListener('change', e => {
+  progress();
+  const card = e.target.closest('.card'); if(card) card.classList.remove('bad');
+});
+
+function confetti(){
+  const colors = ['#FF6B4A','#FFC93C','#2EC4B6','#4D9DE0','#9B5DE5'];
+  for(let i=0;i<70;i++){
+    const d = document.createElement('div');
+    d.className = 'dot';
+    d.style.left = Math.random()*100+'vw';
+    d.style.background = colors[i%5];
+    d.style.animationDuration = (2+Math.random()*2)+'s';
+    d.style.animationDelay = (Math.random()*.6)+'s';
+    document.body.appendChild(d);
+    setTimeout(() => d.remove(), 5000);
+  }
+}
+
+f.addEventListener('submit', async e => {
+  e.preventDefault();
+  document.getElementById('fail').style.display = 'none';
+
+  // 檢查必填：Q1、Q2、Q4、Q5
+  let firstBad = null;
+  [1,2,4,5].forEach(q => {
+    const card = f.querySelector('.card[data-q="'+q+'"]');
+    const bad = !answered(q);
+    card.classList.toggle('bad', bad);
+    if(bad && !firstBad) firstBad = card;
+  });
+  if(firstBad){ firstBad.scrollIntoView({behavior:'smooth', block:'center'}); return; }
+
+  const hasName = radio('rec').startsWith('有，');
+  const topics = multi('topics').map(t => t==='其他' && val('topicsOther') ? '其他：'+val('topicsOther') : t);
+  const styles = multi('styles').map(t => t==='其他' && val('stylesOther') ? '其他：'+val('stylesOther') : t);
+
+  // 欄位順序需與試算表 B～N 欄一致（A 欄時間戳記由 Apps Script 自動產生）
+  const data = {
+    nickname: val('nickname'),
+    score: radio('score'),
+    topics: topics.join('、'),
+    topicsOther: multi('topics').includes('其他') ? val('topicsOther') : '',
+    monthly: radio('monthly'),
+    monthTheme: val('monthTheme'),
+    rec: radio('rec'),
+    spName: hasName ? val('spName') : '',
+    spChannel: hasName ? val('spChannel') : '',
+    spWhy: hasName ? val('spWhy') : '',
+    styles: styles.join('、'),
+    stylesOther: multi('styles').includes('其他') ? val('stylesOther') : '',
+    comment: val('comment')
+  };
+
+  const btn = document.getElementById('send');
+  btn.disabled = true; btn.textContent = '送出中…';
+  try{
+    if(!ENDPOINT.startsWith('https://')) throw new Error('尚未設定 ENDPOINT');
+    await fetch(ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: JSON.stringify(data)
+    });
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('thanks').style.display = 'block';
+    document.getElementById('bar').style.width = '100%';
+    window.scrollTo({top:0, behavior:'smooth'});
+    confetti();
+  }catch(err){
+    document.getElementById('fail').style.display = 'block';
+    btn.disabled = false; btn.textContent = '送出問卷';
+  }
+});
+</script>
+</body>
+</html>
